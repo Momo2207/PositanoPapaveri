@@ -20,9 +20,9 @@
     <meta property="og:title" content="" data-i18n-attr-content="key_og_title">
     <meta property="og:description" content="" data-i18n-attr-content="key_og_desc">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.positanopapaveri.com/">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630/C76548/F5EFE7?text=Positano+Papaveri+Hero">
-    <meta property="og:image:alt" content="Positano Papaveri Jewellery">
+    <meta property="og:url" content="https://www.positanopapaveri.com/"> <!-- Replace with actual URL -->
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/C76548/F5EFE7?text=Positano+Papaveri+Hero+OG">
+    <meta property="og:image:alt" content="Positano Papaveri Schmuckstück vor mediterraner Kulisse">
 
 
     <!-- JSON-LD for Product Example -->
@@ -32,7 +32,7 @@
       "@type": "Product",
       "name": "Papaveri Bloom Necklace",
       "image": [
-        "https://via.placeholder.com/500x500/D8B982/F5EFE7?text=Papaveri+Necklace"
+        "https://via.placeholder.com/600x600/D8B982/1E7A8F?text=Papaveri+Necklace+Detail"
        ],
       "description": "Elegant gold necklace inspired by poppy flowers and the Positano coast, handcrafted by Positano Papaveri.",
       "sku": "PPN001",
@@ -42,10 +42,10 @@
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://www.positanopapaveri.com/products/papaveri-bloom-necklace",
+        "url": "https://www.positanopapaveri.com/products/papaveri-bloom-necklace", /* Replace with actual URL */
         "priceCurrency": "EUR",
         "price": "299.00",
-        "priceValidUntil": "2024-12-31",
+        "priceValidUntil": "2025-12-31",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "https://schema.org/InStock"
       }
@@ -122,10 +122,10 @@
         .language-menu button:hover, .language-menu button:focus { color: var(--clr-terra); text-decoration: underline; text-decoration-color: var(--clr-sea); }
         button { cursor: pointer; border: none; background: none; font-family: inherit; }
         *:focus-visible { outline: 3px solid var(--clr-sea); outline-offset: 2px; }
-        .hero { display: flex; flex-wrap: wrap; background-color: var(--clr-cream); }
+        .hero { display: flex; flex-wrap: wrap; background-color: var(--clr-cream); max-width:100%;}
         .hero-text, .hero-image-container { flex: 1 1 50%; min-width: 300px;}
-        .hero-text { padding: 4rem 2rem; display: flex; flex-direction: column; justify-content: center; }
-        .hero-text h1 { font-family: var(--ff-head); color: var(--clr-terra); font-size: clamp(2.5rem, 5vw, 4rem); margin-top:0;}
+        .hero-text { padding:clamp(2rem, 8vw, 4rem) clamp(1rem, 5vw, 2rem); display: flex; flex-direction: column; justify-content: center; }
+        .hero-text h1 { font-family: var(--ff-head); color: var(--clr-terra); font-size: clamp(2.5rem, 6vw, 4rem); margin-top:0;}
         .hero-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 21/9;}
         .btn {
             display: inline-block;
@@ -133,8 +133,9 @@
             font-weight: 600;
             border-radius: 9999px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             border: 2px solid transparent;
+            text-align: center;
         }
         .btn-primary {
             background-color: var(--clr-terra);
@@ -144,10 +145,9 @@
             background-color: var(--clr-papaveri);
             color: var(--clr-cream);
         }
-        /* Fallback widget styling */
-        .lang-widget {
+        .lang-widget { /* Fallback widget styling */
             background-color: var(--clr-terra);
-            color: var(--clr-cream) !important; /* Important to override potential widget styles */
+            color: var(--clr-cream) !important;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             font-family: var(--ff-body);
@@ -179,10 +179,10 @@
                 <div class="language-menu" aria-label="Language Selection">
                     <span id="language-select-label" class="visually-hidden" data-i18n-text="key_a11y_language_select">Sprache wählen</span>
                     <ul role="listbox" aria-labelledby="language-select-label">
-                        <li><button data-lang="de" aria-selected="true">DE</button></li>
-                        <li><button data-lang="en" aria-selected="false">EN</button></li>
-                        <li><button data-lang="fr" aria-selected="false">FR</button></li>
-                        <li><button data-lang="es" aria-selected="false">ES</button></li>
+                        <li><button data-lang="de" aria-selected="true" lang="de" hreflang="de">DE</button></li>
+                        <li><button data-lang="en" aria-selected="false" lang="en" hreflang="en">EN</button></li>
+                        <li><button data-lang="fr" aria-selected="false" lang="fr" hreflang="fr">FR</button></li>
+                        <li><button data-lang="es" aria-selected="false" lang="es" hreflang="es">ES</button></li>
                     </ul>
                 </div>
                 <div class="accessibility-menu" aria-labelledby="a11y-menu-title-span">
@@ -200,85 +200,113 @@
     </header>
 
     <main id="main-content" aria-live="polite">
-        <section id="hero" class="hero responsive-padding">
+        <section id="hero" class="hero responsive-padding-hero"> <!-- Custom padding for hero -->
             <div class="hero-text">
                 <h1 data-i18n-text="key_headline">Die Poesie von Küste & Blüte</h1>
-                <p data-i18n-text="key_hero_subtitle">Handgefertigter Schmuck...</p>
+                <p data-i18n-text="key_hero_subtitle">Willkommen bei Positano Papaveri...</p>
                 <p><a href="#new-arrivals" class="btn btn-primary" data-i18n-text="key_cta_discover">Kollektion entdecken</a></p>
             </div>
             <div class="hero-image-container">
-                <!-- LCP Image: Preload this if possible, or ensure it's optimized -->
-                <img src="https://via.placeholder.com/1050x500/C76548/F5EFE7?text=Positano+Coast+Inspiration"
+                <img src="https://via.placeholder.com/1050x550/C76548/F5EFE7?text=Positano+Coastal+View+with+Poppies"
                      alt="Inspirierende Ansicht der Positano Küste mit Mohnblüten-Akzenten"
-                     loading="eager">
+                     loading="eager" fetchpriority="high"> <!-- LCP Image -->
             </div>
         </section>
 
         <section id="new-arrivals" class="container responsive-padding">
             <h2 class="section-title" data-i18n-text="key_section_new_arrivals_title">Frisch eingetroffen</h2>
             <div class="product-grid">
-                <!-- Example Product Card (repeat 3-4 times) -->
-                <article class="card">
-                    <img src="https://via.placeholder.com/400x300/D8B982/F5EFE7?text=Product+1" alt="Papaveri Necklace" loading="lazy">
+                <article class="card reveal-on-scroll">
+                    <a href="#product1-details" class="card-image-link">
+                        <img src="https://via.placeholder.com/400x450/D8B982/1E7A8F?text=Papaveri+Gold+Necklace"
+                             alt="Goldene Halskette mit Mohnblütenanhänger" loading="lazy">
+                    </a>
                     <div class="card-content">
-                        <h3>Papaveri Necklace</h3>
-                        <p>€299</p>
-                        <a href="#" class="btn" data-i18n-text="key_cta_discover">Details</a>
+                        <h3>Papaveri Gold Necklace</h3>
+                        <p class="product-price">€299</p>
+                        <a href="#product1-details" class="btn" data-i18n-text="key_cta_discover">Details ansehen</a>
                     </div>
                 </article>
-                <article class="card">
-                    <img src="https://via.placeholder.com/400x300/D8B982/F5EFE7?text=Product+2" alt="Amalfi Earrings" loading="lazy">
+                <article class="card reveal-on-scroll">
+                     <a href="#product2-details" class="card-image-link">
+                        <img src="https://via.placeholder.com/400x450/D8B982/1E7A8F?text=Amalfi+Coast+Earrings"
+                             alt="Silberne Ohrringe inspiriert von der Amalfi Küste" loading="lazy">
+                    </a>
                     <div class="card-content">
-                        <h3>Amalfi Earrings</h3>
-                        <p>€189</p>
-                        <a href="#" class="btn" data-i18n-text="key_cta_discover">Details</a>
+                        <h3>Amalfi Coast Earrings</h3>
+                        <p class="product-price">€189</p>
+                        <a href="#product2-details" class="btn" data-i18n-text="key_cta_discover">Details ansehen</a>
                     </div>
                 </article>
-                <article class="card">
-                    <img src="https://via.placeholder.com/400x300/D8B982/F5EFE7?text=Product+3" alt="Bloom Ring" loading="lazy">
+                <article class="card reveal-on-scroll">
+                    <a href="#product3-details" class="card-image-link">
+                         <img src="https://via.placeholder.com/400x450/D8B982/1E7A8F?text=Poppy+Bloom+Ring"
+                              alt="Feiner Goldring mit Mohnblütendetail" loading="lazy">
+                    </a>
                     <div class="card-content">
-                        <h3>Bloom Ring</h3>
-                        <p>€159</p>
-                        <a href="#" class="btn" data-i18n-text="key_cta_discover">Details</a>
+                        <h3>Poppy Bloom Ring</h3>
+                        <p class="product-price">€159</p>
+                        <a href="#product3-details" class="btn" data-i18n-text="key_cta_discover">Details ansehen</a>
+                    </div>
+                </article>
+                 <article class="card reveal-on-scroll">
+                    <a href="#product4-details" class="card-image-link">
+                         <img src="https://via.placeholder.com/400x450/D8B982/1E7A8F?text=Positano+Charm+Bracelet"
+                              alt="Armband mit Charms von Positano" loading="lazy">
+                    </a>
+                    <div class="card-content">
+                        <h3>Positano Charm Bracelet</h3>
+                        <p class="product-price">€220</p>
+                        <a href="#product4-details" class="btn" data-i18n-text="key_cta_discover">Details ansehen</a>
                     </div>
                 </article>
             </div>
         </section>
 
         <section id="story" class="container responsive-padding">
-            <h2 class="section-title" data-i18n-text="key_section_story_title">Inspiriert von Natur & Handwerk</h2>
+            <h2 class="section-title" data-i18n-text="key_section_story_title">Unsere Geschichte</h2>
             <div class="icon-columns">
-                <div class="icon-column">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun icon-story" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <div class="icon-column reveal-on-scroll">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--clr-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun icon-story" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                     <h3 data-i18n-text="key_story_icon1_title">Mediterrane Seele</h3>
-                    <p data-i18n-text="key_story_icon1_desc">Von den Farben und Formen...</p>
+                    <p data-i18n-text="key_story_icon1_desc">Die dramatischen Klippen...</p>
                 </div>
-                <div class="icon-column">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award icon-story" aria-hidden="true"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                <div class="icon-column reveal-on-scroll">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--clr-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award icon-story" aria-hidden="true"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                     <h3 data-i18n-text="key_story_icon2_title">Handgefertigte Unikate</h3>
-                    <p data-i18n-text="key_story_icon2_desc">Jedes Schmuckstück...</p>
+                    <p data-i18n-text="key_story_icon2_desc">Jedes Schmuckstück wird...</p>
                 </div>
-                <div class="icon-column">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icon-story" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <div class="icon-column reveal-on-scroll">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--clr-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart icon-story" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                     <h3 data-i18n-text="key_story_icon3_title">Slow Luxury</h3>
-                    <p data-i18n-text="key_story_icon3_desc">Zeitlose Eleganz...</p>
+                    <p data-i18n-text="key_story_icon3_desc">Wir glauben an Schmuck...</p>
                 </div>
             </div>
         </section>
 
-        <section id="sustainability" class="container responsive-padding background-taupe-panel">
-            <h2 class="section-title" data-i18n-text="key_section_sustainability_title">Unsere Verpflichtung zur Nachhaltigkeit</h2>
-            <p data-i18n-text="key_sustainability_text">Wir verwenden recycelte Materialien...</p>
+        <section id="sustainability" class="container responsive-padding background-taupe-panel reveal-on-scroll">
+             <div class="sustainability-content">
+                <div class="sustainability-text">
+                    <h2 class="section-title" data-i18n-text="key_section_sustainability_title">Unsere Verpflichtung</h2>
+                    <p data-i18n-text="key_sustainability_text">Bei Positano Papaveri setzen wir...</p>
+                </div>
+                <div class="sustainability-image">
+                    <img src="https://via.placeholder.com/500x350/F5EFE7/A28C7A?text=Sustainable+Craftsmanship"
+                         alt="Nachhaltige Materialien und Handwerkskunst bei Positano Papaveri" loading="lazy">
+                </div>
+            </div>
         </section>
 
         <section id="newsletter" class="container responsive-padding">
-            <h2 class="section-title" data-i18n-text="key_section_newsletter_title">Bleiben Sie inspiriert</h2>
-            <p data-i18n-text="key_section_newsletter_desc">Erhalten Sie Neuigkeiten...</p>
-            <form class="newsletter-form">
-                <label for="email-newsletter" class="visually-hidden" data-i18n-text="key_section_newsletter_placeholder">Ihre E-Mail-Adresse</label>
-                <input type="email" id="email-newsletter" name="email" placeholder="" data-i18n-attr-placeholder="key_section_newsletter_placeholder" required>
-                <button type="submit" class="btn btn-primary" data-i18n-text="key_section_newsletter_button">Abonnieren</button>
-            </form>
+            <div class="newsletter-box reveal-on-scroll">
+                <h2 class="section-title" data-i18n-text="key_section_newsletter_title">Bleiben Sie inspiriert</h2>
+                <p data-i18n-text="key_section_newsletter_desc">Abonnieren Sie unseren Newsletter...</p>
+                <form class="newsletter-form">
+                    <label for="email-newsletter" class="visually-hidden" data-i18n-text="key_section_newsletter_placeholder">Ihre E-Mail-Adresse</label>
+                    <input type="email" id="email-newsletter" name="email" placeholder="" data-i18n-attr-placeholder="key_section_newsletter_placeholder" required>
+                    <button type="submit" class="btn btn-primary" data-i18n-text="key_section_newsletter_button">Jetzt abonnieren</button>
+                </form>
+            </div>
         </section>
     </main>
 
@@ -289,27 +317,28 @@
                 <p data-i18n-text="key_brand_name">Positano Papaveri</p>
                 <address>
                     <span data-i18n-text="key_footer_address">Via dei Papaveri...</span><br>
-                    Email: <a href="mailto:ciao@positanopapaveri.com" data-i18n-text="key_footer_email">ciao@positanopapaveri.com</a>
+                    Email: <a href="mailto:ciao@positanopapaveri.com" data-i18n-text="key_footer_email" class="footer-link-styled">ciao@positanopapaveri.com</a>
                 </address>
             </div>
             <div class="footer-links">
                 <h3>Links</h3>
                 <ul>
-                    <li><a href="#" data-i18n-text="key_footer_legal_notice">Impressum</a></li>
-                    <li><a href="#" data-i18n-text="key_footer_privacy">Datenschutz</a></li>
-                    <li><a href="#" data-i18n-text="key_footer_terms">AGB</a></li>
+                    <li><a href="#legal" data-i18n-text="key_footer_legal_notice" class="footer-link-styled">Impressum</a></li>
+                    <li><a href="#privacy" data-i18n-text="key_footer_privacy" class="footer-link-styled">Datenschutz</a></li>
+                    <li><a href="#terms" data-i18n-text="key_footer_terms" class="footer-link-styled">AGB</a></li>
                 </ul>
             </div>
             <div class="footer-social">
                 <h3>Follow Us</h3>
                 <ul>
-                    <li><a href="#" aria-label="Positano Papaveri on Instagram">Instagram</a></li>
-                    <li><a href="#" aria-label="Positano Papaveri on Facebook">Facebook</a></li>
+                    <li><a href="https://instagram.com/positanopapaveri" target="_blank" rel="noopener noreferrer" aria-label="Positano Papaveri on Instagram" class="footer-link-styled">Instagram</a></li>
+                    <li><a href="https://facebook.com/positanopapaveri" target="_blank" rel="noopener noreferrer" aria-label="Positano Papaveri on Facebook" class="footer-link-styled">Facebook</a></li>
+                     <li><a href="https://pinterest.com/positanopapaveri" target="_blank" rel="noopener noreferrer" aria-label="Positano Papaveri on Pinterest" class="footer-link-styled">Pinterest</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-copyright">
-            <p data-i18n-text="key_footer_copyright">© 2024 Positano Papaveri. Alle Rechte vorbehalten.</p>
+            <p data-i18n-text="key_footer_copyright">© 2025 Positano Papaveri. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
