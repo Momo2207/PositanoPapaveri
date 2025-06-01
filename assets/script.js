@@ -42,24 +42,33 @@ function applyTranslations() {
     const langToUse = (state.currentLanguage === 'de' && state.isSimpleGermanActive) ? 'de_simple' : state.currentLanguage;
     const translationData = state.translations[langToUse];
 
-    if (!translationData) return;
+    if (!translationData) {
+        console.warn(`No translations found for language: ${langToUse}`);
+        return;
+    }
 
     document.querySelectorAll('[data-i18n-text]').forEach(el => {
         const key = el.getAttribute('data-i18n-text');
-        if (translationData[key]) el.textContent = translationData[key];
+        if (translationData[key] !== undefined) el.textContent = translationData[key];
+        // else console.warn(`Missing text key: ${key} for ${langToUse}`);
     });
     document.querySelectorAll('[data-i18n-attr-content]').forEach(el => {
         const key = el.getAttribute('data-i18n-attr-content');
-        if (translationData[key]) el.setAttribute('content', translationData[key]);
+        if (translationData[key] !== undefined) el.setAttribute('content', translationData[key]);
     });
     document.querySelectorAll('[data-i18n-title]').forEach(el => {
         const key = el.getAttribute('data-i18n-title');
-        if (translationData[key]) el.setAttribute('title', translationData[key]);
+        if (translationData[key] !== undefined) el.setAttribute('title', translationData[key]);
     });
     document.querySelectorAll('[data-i18n-attr-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-attr-placeholder');
-        if (translationData[key]) el.setAttribute('placeholder', translationData[key]);
+        if (translationData[key] !== undefined) el.setAttribute('placeholder', translationData[key]);
     });
+     document.querySelectorAll('[data-i18n-alt]').forEach(el => { // For alt attributes
+        const key = el.getAttribute('data-i18n-alt');
+        if (translationData[key] !== undefined) el.setAttribute('alt', translationData[key]);
+    });
+
 
     document.documentElement.lang = (state.currentLanguage === 'de' && state.isSimpleGermanActive) ? 'de-x-simple' : state.currentLanguage;
 
@@ -77,6 +86,21 @@ function applyTranslations() {
         simpleGermanButton.style.display = state.currentLanguage === 'de' ? 'block' : 'none';
         simpleGermanButton.setAttribute('aria-pressed', String(state.isSimpleGermanActive));
     }
+
+    // Update active state in main nav
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll('.main-nav a').forEach(link => {
+        const linkPath = link.getAttribute('href').split("/").pop().split("#")[0] || "index.html";
+        if (linkPath === currentPath) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+     if (currentPath === "index.html" && window.location.hash) { // For homepage hash links
+        const activeLink = document.querySelector(`.main-nav a[href="index.html${window.location.hash}"]`);
+        activeLink?.classList.add('active');
+    }
 }
 
 function setLanguage(lang) {
@@ -89,6 +113,8 @@ function setLanguage(lang) {
             setLocalStorage(LS_KEYS.SIMPLE_GERMAN, 'false');
         }
         applyTranslations();
+    } else {
+        console.warn(`Language ${lang} not available.`);
     }
 }
 
@@ -106,13 +132,9 @@ function toggleGrayscale() {
     setLocalStorage(LS_KEYS.GRAYSCALE, String(state.isGrayscale));
 }
 
-const MIN_FONT_MULTIPLIER = 0.8;
-const MAX_FONT_MULTIPLIER = 2.0;
-const FONT_STEP = 0.1;
-
+const MIN_FONT_MULTIPLIER = 0.8; const MAX_FONT_MULTIPLIER = 2.0; const FONT_STEP = 0.1;
 function updateFontSize() {
-    const newBaseSize = state.baseFontSize * state.fontSizeMultiplier;
-    document.documentElement.style.fontSize = `${newBaseSize}px`;
+    document.documentElement.style.fontSize = `${state.baseFontSize * state.fontSizeMultiplier}px`;
     setLocalStorage(LS_KEYS.FONT_SIZE, state.fontSizeMultiplier.toString());
 }
 function increaseFontSize() {
@@ -127,7 +149,6 @@ function decreaseFontSize() {
         updateFontSize();
     }
 }
-
 function toggleSimpleGerman() {
     if (state.currentLanguage !== 'de') return;
     state.isSimpleGermanActive = !state.isSimpleGermanActive;
@@ -151,7 +172,7 @@ function setupScrollReveal() {
                 observerInstance.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }); // Trigger a bit earlier
     revealElements.forEach(el => observer.observe(el));
 }
 
@@ -160,19 +181,16 @@ function setupHeaderDropdowns() {
         { btnId: 'a11y-toggle-btn', dropdownId: 'a11y-dropdown' },
         { btnId: 'lang-toggle-btn', dropdownId: 'lang-dropdown' }
     ];
-
     dropdownToggles.forEach(item => {
         const toggleBtn = document.getElementById(item.btnId);
         const dropdown = document.getElementById(item.dropdownId);
-
         if (toggleBtn && dropdown) {
             toggleBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                // Close other dropdowns
-                dropdownToggles.forEach(otherItem => {
-                    if (otherItem.dropdownId !== item.dropdownId) {
-                        document.getElementById(otherItem.dropdownId)?.classList.remove('active');
-                        document.getElementById(otherItem.btnId)?.setAttribute('aria-expanded', 'false');
+                dropdownToggles.forEach(other => { // Close other dropdowns
+                    if (other.dropdownId !== item.dropdownId) {
+                        document.getElementById(other.dropdownId)?.classList.remove('active');
+                        document.getElementById(other.btnId)?.setAttribute('aria-expanded', 'false');
                     }
                 });
                 const isActive = dropdown.classList.toggle('active');
@@ -180,20 +198,16 @@ function setupHeaderDropdowns() {
             });
         }
     });
-
     document.addEventListener('click', (event) => {
         dropdownToggles.forEach(item => {
             const toggleBtn = document.getElementById(item.btnId);
             const dropdown = document.getElementById(item.dropdownId);
-            if (dropdown?.classList.contains('active')) {
-                if (!dropdown.contains(event.target) && event.target !== toggleBtn && !toggleBtn.contains(event.target)) {
-                    dropdown.classList.remove('active');
-                    toggleBtn?.setAttribute('aria-expanded', 'false');
-                }
+            if (dropdown?.classList.contains('active') && !dropdown.contains(event.target) && event.target !== toggleBtn && !toggleBtn?.contains(event.target)) {
+                dropdown.classList.remove('active');
+                toggleBtn?.setAttribute('aria-expanded', 'false');
             }
         });
     });
-
     const langDropdown = document.getElementById('lang-dropdown');
     if (langDropdown) {
         langDropdown.addEventListener('click', (event) => {
@@ -204,7 +218,6 @@ function setupHeaderDropdowns() {
             }
         });
     }
-    // Event listeners for a11y buttons are now direct in init, as they are always present in DOM
 }
 
 function initializeAccessibilitySettings() {
@@ -222,8 +235,13 @@ function initializeAccessibilitySettings() {
 async function init() {
     initializeAccessibilitySettings();
     const translationsLoaded = await fetchTranslations();
-    if (translationsLoaded) setLanguage(state.currentLanguage);
-    else console.warn("Translations did not load.");
+    if (translationsLoaded) {
+        setLanguage(state.currentLanguage); // Applies language and also calls applyTranslations
+    } else {
+        console.warn("Translations did not load. Site may not be fully localized.");
+        // Fallback: try to apply with whatever might be in state.translations if any part loaded
+        applyTranslations();
+    }
 
     document.getElementById('toggle-contrast')?.addEventListener('click', toggleHighContrast);
     document.getElementById('toggle-grayscale')?.addEventListener('click', toggleGrayscale);

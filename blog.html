@@ -1,0 +1,142 @@
+      
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <title>Bloom Journal - Positano Papaveri</title>
+    <meta name="description" content="Entdecken Sie Inspirationen, Geschichten und Einblicke in die Welt des floralen Schmucks im Bloom Journal von Positano Papaveri.">
+    <style> /* CRITICAL CSS */
+        :root { /* Same as index.html */
+            --clr-primary-base: #8D5B4C; --clr-primary-hover: #734A3E; --clr-accent-gold: #C0A080;
+            --clr-accent-green: #6A7B50; --clr-background-light: #F8F5F2; --clr-background-muted: #EAE0D5;
+            --clr-text-dark: #4B3F3A; --clr-text-light: #F8F5F2; --clr-focus-ring: var(--clr-accent-green);
+            --ff-head: "Playfair Display", serif; --ff-body: "Nunito Sans", sans-serif; font-size: 16px;
+        }
+        html[data-theme="high"] { /* High contrast vars */
+            --clr-background-light: #ffffff; --clr-primary-base: #733C2A; --clr-text-dark: #000000;
+            --clr-background-muted: #1a1a1a; --clr-text-light: #ffffff; --clr-accent-gold: #A97E52;
+            --clr-accent-green: #4D632D;
+        }
+        body { margin: 0; font-family: var(--ff-body); background-color: var(--clr-background-light); color: var(--clr-text-dark); line-height: 1.7; }
+        .skip-link { position: absolute;top: -9999px;left: -9999px;background-color: var(--clr-primary-base);color: var(--clr-text-light);padding: 0.5em 1em;z-index: 99999;text-decoration: none;border-radius: 0 0 5px 0;}
+        .skip-link:focus { top: 0; left: 0; }
+        *:focus-visible { outline: 3px solid var(--clr-focus-ring); outline-offset: 2px; }
+    </style>
+    <link rel="stylesheet" href="assets/styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/styles.css"></noscript>
+</head>
+<body>
+    <a href="#main-content" class="skip-link" data-i18n-text="key_skip_to_content">Skip to Content</a>
+
+    <header class="site-header"> <!-- Re-use header from index.html -->
+        <div class="container header-container">
+            <a href="index.html" class="logo" data-i18n-text="key_brand_name">Positano Papaveri</a>
+            <nav class="main-nav" aria-label="Main Navigation">
+                 <ul>
+                    <li><a href="index.html#orchid-collection" data-i18n-text="key_nav_collection_preview">Orchid Collection</a></li>
+                    <li><a href="index.html#our-craft" data-i18n-text="key_nav_our_craft">Our Craft</a></li>
+                    <li><a href="blog.html" data-i18n-text="key_nav_bloom_journal" class="active">Bloom Journal</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="signup.html" class="btn btn-primary nav-cta" data-i18n-text="key_nav_signup_drop">First Drop Signup</a>
+                 <div class="header-controls"> <!-- A11y and Lang controls -->
+                     <button id="a11y-toggle-btn" aria-expanded="false" aria-controls="a11y-dropdown" title="Accessibility Settings" class="icon-btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm8 7h-5.17c-.42-1.17-1.05-2.24-1.83-3.18C13.73 3.99 12.91 3 12 3c-.91 0-1.73.99-2 2.82C9.22 6.76 8.59 7.83 8.17 9H3c-1.1 0-2 .9-2 2v5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h8c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5c0-1.1-.9-2-2-2z"/></svg>
+                        <span class="visually-hidden" data-i18n-text="key_a11y_menu_title"></span>
+                    </button>
+                    <div id="a11y-dropdown" class="a11y-dropdown">
+                        <button id="toggle-contrast" data-i18n-text="key_a11y_toggle_contrast"></button>
+                        <button id="toggle-grayscale" data-i18n-text="key_a11y_toggle_grayscale"></button>
+                        <button id="font-decrease" data-i18n-text="key_a11y_font_decrease"></button>
+                        <button id="font-increase" data-i18n-text="key_a11y_font_increase"></button>
+                        <button id="toggle-simple-german" data-i18n-text="key_a11y_simple_language" style="display:none;"></button>
+                    </div>
+                     <button id="lang-toggle-btn" aria-expanded="false" aria-controls="lang-dropdown" title="Select Language" class="icon-btn">
+                        <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.5-2.5a.996.996 0 00-1.41 0l-2.5 2.5a.996.996 0 00.71 1.71h5.41a.996.996 0 00.71-1.71zM11.29 8.21a.996.996 0 001.41 0l2.5-2.5a.996.996 0 10-1.41-1.41L12.5 5.59l-1.29-1.29a.996.996 0 00-1.41 1.41l2.5 2.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                        <span id="current-lang-display">DE</span>
+                        <span class="visually-hidden" data-i18n-text="key_a11y_language_select"></span>
+                    </button>
+                     <div id="lang-dropdown" class="lang-dropdown">
+                        <button data-lang="de" aria-selected="true">Deutsch</button>
+                        <button data-lang="en" aria-selected="false">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="blog-listing-page responsive-padding">
+        <div class="container">
+            <header class="page-header text-center">
+                <h1 data-i18n-text="key_nav_bloom_journal">Bloom Journal</h1>
+                <p class="page-subtitle">Inspirationen, Geschichten und Einblicke in die Welt des floralen Schmucks.</p>
+            </header>
+
+            <div class="blog-grid">
+                <!-- Repeat this article block for each blog post -->
+                <article class="blog-post-item reveal-on-scroll">
+                    <a href="blog-post-template.html?post=1" class="blog-post-image-link">
+                        <img src="https://via.placeholder.com/600x400/C0A080/F8F5F2?text=Orchid+Symbolism+Large" data-i18n-alt="key_blog_post_1_image_alt" alt="Blog Post 1 Image" loading="lazy">
+                    </a>
+                    <div class="blog-post-content">
+                        <h2 class="blog-post-title"><a href="blog-post-template.html?post=1" data-i18n-text="key_blog_post_1_title">Die Symbolik der Orchidee...</a></h2>
+                        <p class="blog-post-meta">Veröffentlicht am <time datetime="2025-05-20">20. Mai 2025</time> <!-- Placeholder Date --></p>
+                        <p class="blog-post-excerpt" data-i18n-text="key_blog_post_1_teaser">Tauchen Sie ein in die faszinierende Welt...</p>
+                        <a href="blog-post-template.html?post=1" class="btn btn-secondary btn-small" data-i18n-text="key_cta_read_more">Weiterlesen</a>
+                    </div>
+                </article>
+
+                <article class="blog-post-item reveal-on-scroll">
+                    <a href="blog-post-template.html?post=2" class="blog-post-image-link">
+                        <img src="https://via.placeholder.com/600x400/8D5B4C/F8F5F2?text=Floral+Styling+Large" data-i18n-alt="key_blog_post_2_image_alt" alt="Blog Post 2 Image" loading="lazy">
+                    </a>
+                    <div class="blog-post-content">
+                        <h2 class="blog-post-title"><a href="blog-post-template.html?post=2" data-i18n-text="key_blog_post_2_title">Floral Chic: Botanischen Schmuck stilvoll kombinieren</a></h2>
+                        <p class="blog-post-meta">Veröffentlicht am <time datetime="2025-05-15">15. Mai 2025</time></p>
+                        <p class="blog-post-excerpt" data-i18n-text="key_blog_post_2_teaser">Von dezenten Alltagslooks...</p>
+                        <a href="blog-post-template.html?post=2" class="btn btn-secondary btn-small" data-i18n-text="key_cta_read_more">Weiterlesen</a>
+                    </div>
+                </article>
+
+                <article class="blog-post-item reveal-on-scroll">
+                    <a href="blog-post-template.html?post=3" class="blog-post-image-link">
+                        <img src="https://via.placeholder.com/600x400/6A7B50/F8F5F2?text=Sustainable+Elegance+Large" data-i18n-alt="key_blog_post_3_image_alt" alt="Blog Post 3 Image" loading="lazy">
+                    </a>
+                    <div class="blog-post-content">
+                        <h2 class="blog-post-title"><a href="blog-post-template.html?post=3" data-i18n-text="key_blog_post_3_title">Nachhaltige Eleganz: Unser Versprechen</a></h2>
+                        <p class="blog-post-meta">Veröffentlicht am <time datetime="2025-05-10">10. Mai 2025</time></p>
+                        <p class="blog-post-excerpt" data-i18n-text="key_blog_post_3_teaser">Erfahren Sie mehr über die Materialien...</p>
+                        <a href="blog-post-template.html?post=3" class="btn btn-secondary btn-small" data-i18n-text="key_cta_read_more">Weiterlesen</a>
+                    </div>
+                </article>
+                <!-- Add more blog post items here -->
+            </div>
+            <!-- Basic Pagination Placeholder -->
+            <nav class="pagination text-center" aria-label="Blog Seitennavigation">
+                <a href="#" class="pagination-link current" aria-current="page">1</a>
+                <a href="#" class="pagination-link">2</a>
+                <a href="#" class="pagination-link">Weiter »</a>
+            </nav>
+        </div>
+    </main>
+
+    <footer class="site-footer-main"> <!-- Re-use footer from index.html -->
+        <div class="container footer-grid">
+            <div class="footer-column"><h3 class="logo-footer" data-i18n-text="key_brand_name">Positano Papaveri</h3><p data-i18n-text="key_footer_brand_desc"></p></div>
+            <div class="footer-column"><h3 data-i18n-text="key_footer_quick_links"></h3><ul><li><a href="index.html#orchid-collection" data-i18n-text="key_nav_collection_preview"></a></li><li><a href="blog.html" data-i18n-text="key_nav_bloom_journal"></a></li><li><a href="signup.html" data-i18n-text="key_nav_signup_drop"></a></li></ul></div>
+            <div class="footer-column"><h3 data-i18n-text="key_footer_contact_title"></h3><address><span data-i18n-text="key_footer_address"></span><br>Email: <a href="mailto:bloom@positanopapaveri.com" data-i18n-text="key_footer_email"></a></address></div>
+            <div class="footer-column"><h3 data-i18n-text="key_footer_follow_us"></h3><ul class="social-links"><li><a href="#" aria-label="Instagram">Instagram</a></li><li><a href="#" aria-label="Pinterest">Pinterest</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p data-i18n-text="key_footer_copyright"></p><ul><li><a href="#legal" data-i18n-text="key_footer_legal_notice"></a></li><li><a href="#privacy" data-i18n-text="key_footer_privacy"></a></li><li><a href="#terms" data-i18n-text="key_footer_terms"></a></li></ul></div>
+    </footer>
+
+    <script src="assets/script.js" type="module"></script>
+</body>
+</html>
+
+    

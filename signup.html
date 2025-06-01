@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <title data-i18n-text="key_signup_page_title">Anmeldung - Positano Papaveri</title>
+    <meta name="robots" content="noindex, nofollow"> <!-- Good for signup pages not meant for SEO -->
+
+    <style> /* CRITICAL CSS - Shares variables with index.html, specific styles in main CSS */
+        :root {
+            --clr-primary-base: #8D5B4C; --clr-primary-hover: #734A3E; --clr-accent-gold: #C0A080;
+            --clr-accent-green: #6A7B50; --clr-background-light: #F8F5F2; --clr-background-muted: #EAE0D5;
+            --clr-text-dark: #4B3F3A; --clr-text-light: #F8F5F2; --clr-focus-ring: var(--clr-accent-green);
+            --ff-head: "Playfair Display", serif; --ff-body: "Nunito Sans", sans-serif; font-size: 16px;
+        }
+        html[data-theme="high"] { /* High contrast vars */
+            --clr-background-light: #ffffff; --clr-primary-base: #733C2A; --clr-text-dark: #000000;
+            --clr-background-muted: #1a1a1a; --clr-text-light: #ffffff; --clr-accent-gold: #A97E52;
+            --clr-accent-green: #4D632D;
+        }
+        body { margin: 0; font-family: var(--ff-body); background-color: var(--clr-background-light); color: var(--clr-text-dark); line-height: 1.7; }
+        .skip-link { position: absolute;top: -9999px;left: -9999px;background-color: var(--clr-primary-base);color: var(--clr-text-light);padding: 0.5em 1em;z-index: 99999;text-decoration: none;border-radius: 0 0 5px 0;}
+        .skip-link:focus { top: 0; left: 0; }
+        *:focus-visible { outline: 3px solid var(--clr-focus-ring); outline-offset: 2px; }
+         .btn { display: inline-block; padding: 0.9em 2.8em; font-weight: 600; border-radius: 4px; text-decoration: none; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; text-align: center; border: 1px solid transparent; cursor: pointer; font-family: var(--ff-body); letter-spacing: 0.03em; }
+        .btn-primary { background-color: var(--clr-primary-base); color: var(--clr-text-light); border-color: var(--clr-primary-base); }
+        .btn-primary:hover, .btn-primary:focus { background-color: var(--clr-primary-hover); border-color: var(--clr-primary-hover); transform: translateY(-2px); }
+    </style>
+    <link rel="stylesheet" href="assets/styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="assets/styles.css"></noscript>
+</head>
+<body>
+    <a href="#main-content" class="skip-link" data-i18n-text="key_skip_to_content">Skip to Content</a>
+
+    <header class="site-header simple-header"> <!-- Simplified header for signup page -->
+        <div class="container header-container">
+            <a href="index.html" class="logo" data-i18n-text="key_brand_name">Positano Papaveri</a>
+             <div class="header-actions">
+                 <div class="header-controls"> <!-- A11y and Lang controls -->
+                     <button id="a11y-toggle-btn" aria-expanded="false" aria-controls="a11y-dropdown" title="Accessibility Settings" class="icon-btn">
+                        <svg viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm8 7h-5.17c-.42-1.17-1.05-2.24-1.83-3.18C13.73 3.99 12.91 3 12 3c-.91 0-1.73.99-2 2.82C9.22 6.76 8.59 7.83 8.17 9H3c-1.1 0-2 .9-2 2v5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h8c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5c0-1.1-.9-2-2-2z"/></svg>
+                        <span class="visually-hidden" data-i18n-text="key_a11y_menu_title">Accessibility</span>
+                    </button>
+                    <div id="a11y-dropdown" class="a11y-dropdown">
+                        <button id="toggle-contrast" data-i18n-text="key_a11y_toggle_contrast"></button>
+                        <button id="toggle-grayscale" data-i18n-text="key_a11y_toggle_grayscale"></button>
+                        <button id="font-decrease" data-i18n-text="key_a11y_font_decrease"></button>
+                        <button id="font-increase" data-i18n-text="key_a11y_font_increase"></button>
+                        <button id="toggle-simple-german" data-i18n-text="key_a11y_simple_language" style="display:none;"></button>
+                    </div>
+                     <button id="lang-toggle-btn" aria-expanded="false" aria-controls="lang-dropdown" title="Select Language" class="icon-btn">
+                        <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.5-2.5a.996.996 0 00-1.41 0l-2.5 2.5a.996.996 0 00.71 1.71h5.41a.996.996 0 00.71-1.71zM11.29 8.21a.996.996 0 001.41 0l2.5-2.5a.996.996 0 10-1.41-1.41L12.5 5.59l-1.29-1.29a.996.996 0 00-1.41 1.41l2.5 2.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                        <span id="current-lang-display">DE</span>
+                        <span class="visually-hidden" data-i18n-text="key_a11y_language_select"></span>
+                    </button>
+                     <div id="lang-dropdown" class="lang-dropdown">
+                        <button data-lang="de" aria-selected="true">Deutsch</button>
+                        <button data-lang="en" aria-selected="false">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="signup-page-main">
+        <div class="signup-visual-column">
+            <img src="https://via.placeholder.com/800x1200/C0A080/F8F5F2?text=Elegant+Orchid+Detail" data-i18n-alt="key_signup_image_alt" alt="Orchid Detail" loading="eager">
+        </div>
+        <div class="signup-form-column">
+            <div class="signup-form-container">
+                <h1 data-i18n-text="key_signup_page_headline">Seien Sie der Erste, der erblüht.</h1>
+                <p data-i18n-text="key_signup_page_subheadline">Melden Sie sich jetzt an und erhalten Sie exklusiven Vorabzugang...</p>
+                
+                <form id="firstDropSignupForm" action="YOUR_FORM_HANDLER_URL" method="POST"> <!-- Replace with actual form handler -->
+                    <div class="form-group">
+                        <label for="email" data-i18n-text="key_signup_form_email_label">Ihre E-Mail-Adresse</label>
+                        <input type="email" id="email" name="email" required aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">Wir teilen Ihre E-Mail mit niemandem.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-i18n-text="key_signup_form_button">Jetzt für Early Access anmelden</button>
+                </form>
+                <div id="signup-success" class="signup-success-message" style="display:none;" data-i18n-text="key_signup_success_message" role="alert">
+                    Vielen Dank! Sie hören von uns.
+                </div>
+                <div id="signup-error" class="signup-error-message" style="display:none;" role="alert">
+                    Etwas ist schiefgelaufen. Bitte versuchen Sie es später erneut.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer-main simple-footer">
+         <div class="container footer-bottom">
+            <p data-i18n-text="key_footer_copyright">© 2025 Positano Papaveri...</p>
+            <ul>
+                <li><a href="index.html#privacy" data-i18n-text="key_footer_privacy">Datenschutz</a></li>
+                <li><a href="index.html#terms" data-i18n-text="key_footer_terms">AGB</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="assets/script.js" type="module"></script>
+    <script>
+        // Basic form handling for signup page (replace with more robust solution)
+        const signupForm = document.getElementById('firstDropSignupForm');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default submission
+                // Basic validation
+                const emailInput = document.getElementById('email');
+                if (!emailInput.value || !emailInput.checkValidity()) {
+                    document.getElementById('signup-error').textContent = 'Bitte geben Sie eine gültige E-Mail Adresse ein.';
+                    document.getElementById('signup-error').style.display = 'block';
+                    document.getElementById('signup-success').style.display = 'none';
+                    emailInput.focus();
+                    return;
+                }
+
+                // Simulate form submission
+                console.log('Form submitted with email:', emailInput.value);
+                // In a real scenario, you would send this to your backend or email service
+                // For example:
+                // fetch(signupForm.action, { method: 'POST', body: new FormData(signupForm) })
+                // .then(response => response.json())
+                // .then(data => { ... handle success ... })
+                // .catch(error => { ... handle error ... });
+
+                // Show success message (simulation)
+                document.getElementById('signup-success').style.display = 'block';
+                document.getElementById('signup-error').style.display = 'none';
+                signupForm.reset(); // Clear the form
+            });
+        }
+    </script>
+</body>
+</html>
