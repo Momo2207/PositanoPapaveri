@@ -1,0 +1,271 @@
+'use strict';
+
+const LS_PREFIX = 'positanoPapaveri_';
+const LS_KEYS = {
+    LANGUAGE: `${LS_PREFIX}language`,
+    THEME: `${LS_PREFIX}theme`, // For high-contrast
+    GRAYSCALE: `${LS_PREFIX}grayscale`,
+    FONT_SIZE: `${LS_PREFIX}fontSizeMultiplier`,
+    SIMPLE_GERMAN: `${LS_PREFIX}simpleGermanActive`
+};
+
+const state = {
+    currentLanguage: getLocalStorage(LS_KEYS.LANGUAGE) || 'de',
+    translations: {},
+    isHighContrast: getLocalStorage(LS_KEYS.THEME) === 'high',
+    isGrayscale: getLocalStorage(LS_KEYS.GRAYSCALE) === 'true',
+    fontSizeMultiplier: parseFloat(getLocalStorage(LS_KEYS.FONT_SIZE)) || 1.0,
+    isSimpleGermanActive: getLocalStorage(LS_KEYS.SIMPLE_GERMAN) === 'true' && (getLocalStorage(LS_KEYS.LANGUAGE) || 'de') === 'de',
+    baseFontSize: 16 // px
+};
+
+// --- UTILITY FUNCTIONS ---
+function getLocalStorage(key) {
+    try {
+        return localStorage.getItem(key);
+    } catch (e) {
+        console.warn("LocalStorage access denied or unavailable.", e);
+        return null;
+    }
+}
+
+function setLocalStorage(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch (e) {
+        console.warn("LocalStorage access denied or unavailable.", e);
+    }
+}
+
+
+// --- TRANSLATION ---
+async function fetchTranslations() {
+    try {
+        const response = await fetch('assets/translations.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        state.translations = await response.json();
+        return true;
+    } catch (error) {
+        console.error("Could not load translations:", error);
+        // Implement fallback here if desired (e.g. free-website-translation.com widget)
+        return false;
+    }
+}
+
+function applyTranslations() {
+    const langToUse = (state.currentLanguage === 'de' && state.isSimpleGermanActive) ? 'de_simple' : state.currentLanguage;
+    const translationData = state.translations[langToUse];
+
+    if (!translationData) {
+        console.warn(`No translations found for language: ${langToUse}`);
+        return;
+    }
+
+    document.querySelectorAll('[data-i18n-text]').forEach(el => {
+        const key = el.getAttribute('data-i18n-text');
+        if (translationData[key]) {
+            el.textContent = translationData[key];
+        } else {
+            console.warn(`Missing translation key (text): ${key} for lang ${langToUse}`);
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-attr-content]').forEach(el => {
+        const key = el.getAttribute('data-i18n-attr-content');
+        if (translationData[key]) {
+            el.setAttribute('content', translationData[key]);
+        } else {
+            console.warn(`Missing translation key (content attr): ${key} for lang ${langToUse}`);
+        }
+    });
+    
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (translationData[key]) {
+            el.setAttribute('title', translationData[key]);
+        } else {
+            console.warn(`Missing translation key (title attr): ${key} for lang ${langToUse}`);
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-attr-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-attr-placeholder');
+        if (translationData[key]) {
+            el.setAttribute('placeholder', translationData[key]);
+        } else {
+            console.warn(`Missing translation key (placeholder attr): ${key} for lang ${langToUse}`);
+        }
+    });
+
+
+    // Update HTML lang attribute
+    document.documentElement.lang = state.currentLanguage;
+
+    // Update selected state for language buttons
+    document.querySelectorAll('.language-menu button').forEach(btn => {
+        btn.setAttribute('aria-selected', btn.dataset.lang === state.currentLanguage);
+    });
+
+    // Show/hide "Einfache Sprache" button
+    const simpleGermanButton = document.getElementById('toggle-simple-german');
+    if (simpleGermanButton) {
+        simpleGermanButton.style.display = state.currentLanguage === 'de' ? 'inline-block' : 'none';
+        simpleGermanButton.setAttribute('aria-pressed', state.isSimpleGermanActive);
+    }
+}
+
+function setLanguage(lang) {
+    if (state.translations[lang]) {
+        state.currentLanguage = lang;
+        setLocalStorage(LS_KEYS.LANGUAGE, lang);
+        // If switching away from German, disable simple German mode
+        if (lang !== 'de' && state.isSimpleGermanActive) {
+            state.isSimpleGermanActive = false;
+            setLocalStorage(LS_KEYS.SIMPLE_GERMAN, 'false');
+        }
+        applyTranslations();
+    } else {
+        console.warn(`Language ${lang} not available in translations.`);
+    }
+}
+
+
+// --- ACCESSIBILITY FEATURES ---
+
+// High Contrast
+function toggleHighContrast() {
+    state.isHighContrast = !state.isHighContrast;
+    document.documentElement.setAttribute('data-theme', state.isHighContrast ? 'high' : 'default');
+    document.getElementById('toggle-contrast').setAttribute('aria-pressed', state.isHighContrast);
+    setLocalStorage(LS_KEYS.THEME, state.isHighContrast ? 'high' : 'default');
+}
+
+// Grayscale
+function toggleGrayscale() {
+    state.isGrayscale = !state.isGrayscale;
+    document.documentElement.classList.toggle('grayscale', state.isGrayscale);
+    document.getElementById('toggle-grayscale').setAttribute('aria-pressed', state.isGrayscale);
+    setLocalStorage(LS_KEYS.GRAYSCALE, state.isGrayscale);
+}
+
+// Font Scaler
+const MIN_FONT_MULTIPLIER = 0.8; // 80%
+const MAX_FONT_MULTIPLIER = 2.0; // 200%
+const FONT_STEP = 0.1;
+
+function updateFontSize() {
+    document.documentElement.style.fontSize = `${state.baseFontSize * state.fontSizeMultiplier}px`;
+    setLocalStorage(LS_KEYS.FONT_SIZE, state.fontSizeMultiplier.toString());
+}
+
+function increaseFontSize() {
+    if (state.fontSizeMultiplier < MAX_FONT_MULTIPLIER) {
+        state.fontSizeMultiplier = Math.min(MAX_FONT_MULTIPLIER, state.fontSizeMultiplier + FONT_STEP);
+        updateFontSize();
+    }
+}
+
+function decreaseFontSize() {
+    if (state.fontSizeMultiplier > MIN_FONT_MULTIPLIER) {
+        state.fontSizeMultiplier = Math.max(MIN_FONT_MULTIPLIER, state.fontSizeMultiplier - FONT_STEP);
+        updateFontSize();
+    }
+}
+
+// Einfache Sprache (Simple German)
+function toggleSimpleGerman() {
+    if (state.currentLanguage !== 'de') return; // Should only be available for German
+
+    state.isSimpleGermanActive = !state.isSimpleGermanActive;
+    document.getElementById('toggle-simple-german').setAttribute('aria-pressed', state.isSimpleGermanActive);
+    setLocalStorage(LS_KEYS.SIMPLE_GERMAN, state.isSimpleGermanActive);
+    applyTranslations(); // Re-apply translations with the new simple German state
+}
+
+// --- SCROLL REVEAL ---
+function setupScrollReveal() {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionQuery.matches) {
+        return; // Reduced motion preferred, skip animations
+    }
+
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if (!revealElements.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Optional: stop observing once visible
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    revealElements.forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// --- INITIALIZATION ---
+function initializeAccessibilitySettings() {
+    // Apply high contrast
+    if (state.isHighContrast) {
+        document.documentElement.setAttribute('data-theme', 'high');
+    }
+    document.getElementById('toggle-contrast').setAttribute('aria-pressed', state.isHighContrast);
+
+    // Apply grayscale
+    if (state.isGrayscale) {
+        document.documentElement.classList.add('grayscale');
+    }
+    document.getElementById('toggle-grayscale').setAttribute('aria-pressed', state.isGrayscale);
+
+    // Apply font size
+    updateFontSize();
+
+    // Apply simple German state (button visibility is handled by applyTranslations)
+    const simpleGermanButton = document.getElementById('toggle-simple-german');
+    if (simpleGermanButton && state.currentLanguage === 'de') {
+        simpleGermanButton.setAttribute('aria-pressed', state.isSimpleGermanActive);
+    }
+}
+
+async function init() {
+    // Load and apply initial settings from LocalStorage
+    initializeAccessibilitySettings();
+
+    const translationsLoaded = await fetchTranslations();
+    if (translationsLoaded) {
+        // Set initial language and apply translations
+        setLanguage(state.currentLanguage); // This also calls applyTranslations
+    }
+
+    // Event Listeners
+    document.querySelectorAll('.language-menu button[data-lang]').forEach(button => {
+        button.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+    });
+
+    document.getElementById('toggle-contrast').addEventListener('click', toggleHighContrast);
+    document.getElementById('toggle-grayscale').addEventListener('click', toggleGrayscale);
+    document.getElementById('font-increase').addEventListener('click', increaseFontSize);
+    document.getElementById('font-decrease').addEventListener('click', decreaseFontSize);
+    
+    const simpleGermanButton = document.getElementById('toggle-simple-german');
+    if (simpleGermanButton) {
+        simpleGermanButton.addEventListener('click', toggleSimpleGerman);
+    }
+    
+    // Setup scroll reveal animations
+    setupScrollReveal();
+
+    // Set a data attribute for generous whitespace based on screen width or a setting
+    // For now, just set it to enable CSS rules. Could be dynamic.
+    document.documentElement.setAttribute('data-section-padding', 'generous');
+}
+
+// --- DOMContentLoaded ---
+document.addEventListener('DOMContentLoaded', init);

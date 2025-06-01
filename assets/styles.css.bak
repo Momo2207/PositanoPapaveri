@@ -1,0 +1,349 @@
+/* :root variables are in critical CSS (index.html) */
+/* html[data-theme="high"] variables are in critical CSS (index.html) */
+/* body, skip-link, header, .logo, navs, buttons, hero, .btn styles are in critical CSS */
+
+/* General & Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--ff-head);
+    color: var(--clr-terra);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+    color: var(--clr-sea);
+    text-decoration: underline;
+    text-decoration-color: var(--clr-sea);
+    text-underline-offset: 0.2em;
+}
+a:hover, a:focus {
+    color: var(--clr-papaveri);
+    text-decoration-color: var(--clr-papaveri);
+}
+
+/* Utilities */
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap; /* 1 */
+}
+
+.container {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.responsive-padding {
+    padding-top: min(max(40px, 5vh), 80px);
+    padding-bottom: min(max(40px, 5vh), 80px);
+}
+html[data-section-padding="generous"] .responsive-padding {
+    padding-top: min(max(80px, 10vh), 120px);
+    padding-bottom: min(max(80px, 10vh), 120px);
+}
+
+
+/* Header specific controls */
+.controls-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.language-menu button, .accessibility-menu button {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid transparent;
+}
+.language-menu button[aria-selected="true"] {
+    color: var(--clr-terra);
+    border-color: var(--clr-terra);
+    font-weight: bold;
+}
+.accessibility-menu button[aria-pressed="true"] {
+    background-color: var(--clr-sea);
+    color: var(--clr-cream);
+    border-radius: 4px;
+}
+.accessibility-menu button#toggle-simple-german[aria-pressed="true"] {
+    background-color: var(--clr-papaveri);
+}
+
+
+/* Section Titles */
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+/* Card Container (.card) */
+.card {
+    background-color: var(--clr-cream);
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.card:hover, .card:focus-within {
+    border-color: var(--clr-gold);
+    box-shadow: 0 6px 16px rgba(0,0,0,.1);
+}
+.card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.card-content h3 {
+    margin-top: 0;
+    font-family: var(--ff-head);
+    color: var(--clr-terra);
+}
+.card-content p {
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+.card .btn {
+    background-color: transparent;
+    color: var(--clr-terra);
+    border: 2px solid var(--clr-terra);
+    align-self: flex-start;
+}
+.card .btn:hover, .card .btn:focus {
+    background-color: var(--clr-terra);
+    color: var(--clr-cream);
+}
+
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 2rem;
+}
+
+/* Story Section - Icon Columns */
+.icon-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: 2.5rem;
+    text-align: center;
+}
+.icon-column svg.icon-story {
+    stroke: var(--clr-gold);
+    margin-bottom: 1rem;
+    width: 48px;
+    height: 48px;
+}
+.icon-column h3 {
+    color: var(--clr-taupe); /* Secondary text color for these subheadings */
+    font-family: var(--ff-body);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+html[data-theme="high"] .icon-column h3 {
+    color: var(--clr-taupe); /* This will be dark from HC vars */
+}
+
+
+/* Sustainability Section */
+.background-taupe-panel {
+    background-color: var(--clr-taupe);
+    color: var(--clr-cream);
+    padding: 2rem;
+    border-radius: 8px;
+}
+.background-taupe-panel h2 {
+    color: var(--clr-cream);
+}
+.background-taupe-panel a {
+    color: var(--clr-gold);
+}
+.background-taupe-panel a:hover, .background-taupe-panel a:focus {
+    color: var(--clr-cream);
+}
+html[data-theme="high"] .background-taupe-panel {
+    background-color: var(--clr-taupe); /* very dark */
+    color: #FFFFFF; /* white text */
+}
+html[data-theme="high"] .background-taupe-panel h2 {
+    color: #FFFFFF;
+}
+html[data-theme="high"] .background-taupe-panel a {
+    color: var(--clr-gold); /* Lighter gold for contrast */
+}
+
+
+/* Newsletter Section */
+.newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    justify-content: center;
+}
+.newsletter-form input[type="email"] {
+    flex-grow: 1;
+    padding: .75rem 1rem;
+    border: 2px solid var(--clr-taupe);
+    border-radius: 9999px;
+    font-size: 1rem;
+    min-width: 200px;
+}
+.newsletter-form input[type="email"]:focus {
+    border-color: var(--clr-sea);
+    outline: none;
+}
+
+/* Footer */
+.footer-main {
+    background-color: var(--clr-cream);
+    border-top: 2px solid var(--clr-gold);
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    color: var(--clr-taupe);
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.footer-main h3 {
+    font-family: var(--ff-body);
+    font-weight: 600;
+    color: var(--clr-terra);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+}
+.footer-main ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-main ul li {
+    margin-bottom: 0.5rem;
+}
+.footer-main a {
+    text-decoration: none;
+    color: var(--clr-taupe);
+}
+.footer-main a:hover, .footer-main a:focus {
+    color: var(--clr-sea);
+    text-decoration: underline;
+}
+.footer-copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--clr-gold);
+}
+html[data-theme="high"] .footer-main {
+    background-color: #000;
+    color: #fff;
+    border-top-color: var(--clr-gold);
+}
+html[data-theme="high"] .footer-main h3, html[data-theme="high"] .footer-main a {
+    color: #fff;
+}
+html[data-theme="high"] .footer-main a:hover, html[data-theme="high"] .footer-main a:focus {
+    color: var(--clr-gold);
+}
+html[data-theme="high"] .footer-copyright {
+    border-top-color: var(--clr-gold);
+}
+
+
+/* Grayscale */
+html.grayscale {
+    filter: grayscale(1);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-reveal { /* Class for elements that would be animated */
+      opacity: 1 !important;
+      transform: none !important;
+  }
+}
+
+/* Scroll reveal (example - to be triggered by JS) */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .controls-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero {
+        flex-direction: column;
+    }
+    .hero-text {
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+    .hero-image-container img {
+        aspect-ratio: 16/9; /* Adjust for smaller screens if needed */
+    }
+    .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .newsletter-form button {
+        width: 100%;
+    }
+}
