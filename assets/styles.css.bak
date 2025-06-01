@@ -1,486 +1,407 @@
 /* :root variables are in critical CSS (index.html) */
 /* html[data-theme="high"] variables are in critical CSS (index.html) */
-/* body, skip-link, header, .logo, navs, buttons, hero, .btn styles are in critical CSS */
+/* body, skip-link, basic button styles are in critical CSS */
 
-/* General & Reset */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+/* --- General & Utilities --- */
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--clr-dark); text-decoration: none; transition: color 0.3s ease; }
+a:hover, a:focus { color: var(--clr-terra); }
+.container { max-width: 1300px; /* Slightly wider for this design */ margin-left: auto; margin-right: auto; padding-left: 20px; padding-right: 20px; }
+.responsive-padding { padding-top: clamp(50px, 8vw, 80px); padding-bottom: clamp(50px, 8vw, 80px); }
+.text-center { text-align: center; }
+.visually-hidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; white-space: nowrap; }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block; /* Removes bottom space under image */
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--ff-head);
-    color: var(--clr-terra);
-    margin-top: 1.5em;
-    margin-bottom: 0.5em;
-    line-height: 1.2;
-}
-h1 { font-size: clamp(2.5rem, 6vw, 4rem); } /* Moved from critical for consistency */
-h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); }
-h3 { font-size: clamp(1.3rem, 4vw, 1.7rem); }
-
-a {
-    color: var(--clr-sea);
-    text-decoration: underline;
-    text-decoration-color: var(--clr-sea);
-    text-underline-offset: 0.2em;
-    transition: color 0.3s ease, text-decoration-color 0.3s ease;
-}
-a:hover, a:focus {
-    color: var(--clr-papaveri);
-    text-decoration-color: var(--clr-papaveri);
-}
-
-/* Utilities */
-.visually-hidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap; /* 1 */
-}
-
-.container {
-    max-width: 1440px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: clamp(15px, 4vw, 40px);
-    padding-right: clamp(15px, 4vw, 40px);
-}
-
-.responsive-padding {
-    padding-top: clamp(60px, 10vh, 100px);
-    padding-bottom: clamp(60px, 10vh, 100px);
-}
-.responsive-padding-hero { /* Specific for hero if needed */
-    padding-top: 0; /* Hero usually has its own spacing */
-    padding-bottom: 0;
-}
-html[data-section-padding="generous"] .responsive-padding {
-    padding-top: clamp(80px, 12vh, 120px);
-    padding-bottom: clamp(80px, 12vh, 120px);
-}
-
-/* Header specific controls */
-.controls-container {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-.language-menu button, .accessibility-menu button {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.5rem;
-    border: 1px solid transparent;
-    background: none;
-    color: var(--clr-taupe);
-}
-.language-menu button:hover, .language-menu button:focus,
-.accessibility-menu button:hover, .accessibility-menu button:focus {
-    color: var(--clr-terra);
-    border-color: transparent; /* Keep border transparent or add specific focus border */
-}
-.language-menu button[aria-selected="true"] {
-    color: var(--clr-terra);
-    border: 1px solid var(--clr-terra);
-    font-weight: bold;
-    border-radius: 4px;
-}
-.accessibility-menu button[aria-pressed="true"] {
-    background-color: var(--clr-sea);
-    color: var(--clr-cream);
-    border-radius: 4px;
-}
-.accessibility-menu button#toggle-simple-german[aria-pressed="true"] {
-    background-color: var(--clr-papaveri);
-}
-
-/* Section Titles */
+/* Section Titles (General) */
 .section-title {
-    text-align: center;
-    margin-bottom: clamp(1.5rem, 5vh, 3rem); /* Responsive margin */
-}
-
-/* Card Container (.card) */
-.card {
-    background-color: var(--clr-cream);
-    box-shadow: 0 4px 12px rgba(0,0,0,.06);
-    border: 2px solid transparent;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-.card:hover, .card:focus-within {
-    border-color: var(--clr-gold);
-    box-shadow: 0 6px 16px rgba(0,0,0,.1);
-}
-.card .card-image-link { /* Make image clickable */
-    display: block;
-    text-decoration: none;
-}
-.card img {
-    width: 100%;
-    aspect-ratio: 4/4.5; /* Slightly taller for product images */
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-.card:hover img, .card:focus-within img {
-    transform: scale(1.03);
-}
-.card-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    text-align: center; /* Center card text */
-}
-.card-content h3 {
-    margin-top: 0;
     font-family: var(--ff-head);
-    color: var(--clr-terra);
-    font-size: 1.3rem; /* Adjust as needed */
-    margin-bottom: 0.5rem;
-}
-.card-content .product-price {
-    font-family: var(--ff-body);
-    font-weight: 600;
-    color: var(--clr-taupe);
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-.card .btn {
-    background-color: transparent;
-    color: var(--clr-terra);
-    border: 2px solid var(--clr-terra);
-    align-self: center; /* Center button in card */
-    padding: .6rem 1.5rem;
-    font-size: 0.9rem;
-}
-.card .btn:hover, .card .btn:focus {
-    background-color: var(--clr-terra);
-    color: var(--clr-cream);
-}
-
-/* Product Grid */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); /* Smaller min for more items */
-    gap: clamp(1.5rem, 4vw, 2.5rem); /* Responsive gap */
-}
-
-/* Story Section - Icon Columns */
-.icon-columns {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-    gap: 2.5rem;
+    color: var(--clr-dark); /* Darker titles like example */
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+    font-weight: 400; /* Playfair often looks better not too bold */
     text-align: center;
 }
-.icon-column svg.icon-story {
-    /* stroke: var(--clr-gold); in HTML for specificity */
+.section-title-alt { /* For feature sections where title might be left-aligned */
+    font-family: var(--ff-head);
+    color: var(--clr-dark);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     margin-bottom: 1rem;
-    width: 48px;
-    height: 48px;
-    transition: transform 0.3s ease;
-}
-.icon-column:hover svg.icon-story {
-    transform: scale(1.1);
-}
-.icon-column h3 {
-    color: var(--clr-taupe);
-    font-family: var(--ff-body);
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-}
-html[data-theme="high"] .icon-column h3 {
-    color: var(--clr-taupe);
+    font-weight: 400;
+    text-align: left;
 }
 
-/* Sustainability Section */
-.background-taupe-panel {
-    background-color: var(--clr-taupe);
-    color: var(--clr-cream);
-    padding: clamp(2rem, 6vw, 4rem); /* Responsive padding */
-    border-radius: 8px;
+
+/* --- Header --- */
+.site-header {
+    padding: 1rem 0;
+    background-color: var(--clr-cream); /* Or #fff if preferred for this design */
+    border-bottom: 1px solid #eee; /* Subtle border like example */
 }
-.sustainability-content {
+.header-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    justify-content: space-between;
     align-items: center;
 }
-.sustainability-text {
-    flex: 1 1 55%; /* Give more space to text */
-    min-width: 280px;
+.logo {
+    font-family: var(--ff-head);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--clr-dark); /* Dark logo as in example */
+    text-decoration: none;
+    flex-shrink: 0;
 }
-.sustainability-image {
-    flex: 1 1 40%; /* Image takes less space */
-    min-width: 250px;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.sustainability-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.background-taupe-panel .section-title { /* Adjust title within this panel */
-    color: var(--clr-cream);
-    text-align: left;
-    margin-bottom: 1rem;
-}
-.background-taupe-panel p {
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-.background-taupe-panel a {
-    color: var(--clr-gold);
-    font-weight: 600;
-}
-.background-taupe-panel a:hover, .background-taupe-panel a:focus {
-    color: var(--clr-cream);
-    text-decoration-color: var(--clr-cream);
-}
-html[data-theme="high"] .background-taupe-panel {
-    background-color: #1a1a1a;
-    color: #FFFFFF;
-}
-html[data-theme="high"] .background-taupe-panel .section-title,
-html[data-theme="high"] .background-taupe-panel p {
-    color: #FFFFFF;
-}
-html[data-theme="high"] .background-taupe-panel a {
-    color: var(--clr-gold);
-}
-
-
-/* Newsletter Section */
-.newsletter-box {
-    background-color: var(--clr-cream);
-    padding: clamp(2rem, 6vw, 3.5rem);
-    border-radius: 8px;
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,.06);
-    border: 1px solid var(--clr-gold);
-}
-.newsletter-box .section-title {
-    margin-bottom: 0.5rem;
-}
-.newsletter-box p {
-    margin-bottom: 1.5rem;
-    color: var(--clr-taupe);
-}
-.newsletter-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
-    justify-content: center;
-}
-.newsletter-form input[type="email"] {
+.main-nav {
     flex-grow: 1;
-    padding: .75rem 1rem;
-    border: 2px solid var(--clr-taupe);
-    border-radius: 9999px;
-    font-size: 1rem;
-    min-width: 200px;
     text-align: center;
 }
-.newsletter-form input[type="email"]:focus-visible {
-    border-color: var(--clr-sea);
-    outline: 2px solid var(--clr-sea);
-    outline-offset: 1px;
-}
-.newsletter-form .btn-primary {
-    flex-shrink: 0; /* Prevent button from shrinking too much */
-}
-
-/* Footer */
-.footer-main {
-    background-color: var(--clr-cream);
-    border-top: 2px solid var(--clr-gold);
-    padding-top: clamp(2rem, 6vh, 3rem);
-    padding-bottom: clamp(1rem, 3vh, 1.5rem);
-    color: var(--clr-taupe);
-    font-size: 0.95rem;
-}
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-.footer-main h3 {
-    font-family: var(--ff-body);
-    font-weight: 600;
-    color: var(--clr-terra);
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
-    margin-top: 0;
-}
-.footer-main ul {
+.main-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: inline-flex; /* Changed from flex to inline-flex for centering */
+    gap: clamp(1rem, 2.5vw, 2rem);
 }
-.footer-main ul li {
-    margin-bottom: 0.5rem;
-}
-.footer-main a.footer-link-styled { /* Specific class for footer links */
+.main-nav a {
     text-decoration: none;
-    color: var(--clr-taupe);
+    color: var(--clr-dark);
+    font-weight: 600; /* Example nav links look boldish */
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    padding-bottom: 0.3em;
+    position: relative;
 }
-.footer-main a.footer-link-styled:hover,
-.footer-main a.footer-link-styled:focus {
-    color: var(--clr-sea);
-    text-decoration: underline;
-    text-decoration-color: var(--clr-sea);
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--clr-terra);
+    transition: width 0.3s ease;
 }
-.footer-main address {
-    font-style: normal;
+.main-nav a:hover::after, .main-nav a:focus::after {
+    width: 100%;
+}
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; /* Smaller gap for icons */
+    flex-shrink: 0;
+    position: relative; /* For dropdown positioning */
+}
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--clr-dark);
+}
+.icon-btn svg { width: 22px; height: 22px; display: block; }
+.icon-btn:hover, .icon-btn:focus { color: var(--clr-terra); }
+
+/* Accessibility and Language Dropdowns */
+.accessibility-menu-container, .language-menu-container { position: relative; }
+.a11y-dropdown, .lang-dropdown {
+    display: none; /* Hidden by default, shown by JS */
+    position: absolute;
+    top: calc(100% + 10px); /* Position below button */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 0.5rem;
+    z-index: 100;
+    min-width: 180px; /* Minimum width */
+    display: none; /* JS will toggle this */
+}
+.a11y-dropdown.active, .lang-dropdown.active { display: block; }
+
+.a11y-dropdown button, .lang-dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    background: none;
+    border: none;
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    color: var(--clr-dark);
+    cursor: pointer;
+    border-radius: 3px;
+}
+.a11y-dropdown button:hover, .lang-dropdown button:hover,
+.a11y-dropdown button:focus, .lang-dropdown button:focus {
+    background-color: var(--clr-cream);
+    color: var(--clr-terra);
+}
+.lang-dropdown button[aria-selected="true"] {
+    font-weight: bold;
+    color: var(--clr-terra);
+}
+#current-lang-display { font-size: 0.8rem; margin-left: 0.3em; color: var(--clr-taupe); }
+
+
+/* --- Hero Section --- */
+.hero-section {
+    height: 75vh; /* Adjust as needed */
+    min-height: 450px;
+    max-height: 800px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    color: #fff; /* Assuming text is light on dark image */
+}
+.hero-section::before { /* Optional overlay for text contrast */
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0,0,0,0.3); /* Adjust darkness */
+}
+.hero-content {
+    position: relative; /* To be above overlay */
+    z-index: 1;
+    max-width: 700px;
+}
+.hero-content h1 {
+    font-family: var(--ff-head);
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Larger hero headline */
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 700; /* Example looks bold */
+    line-height: 1.1;
+}
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: #f0f0f0; /* Slightly off-white */
+    margin-bottom: 2rem;
     line-height: 1.5;
 }
-.footer-copyright {
+.hero-btn {
+    padding: 1em 3em; /* Larger hero button */
+    font-size: 1rem;
+}
+
+/* --- Category Section --- */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.category-card {
     text-align: center;
+}
+.category-card a {
+    text-decoration: none;
+    color: var(--clr-dark);
+    display: block;
+}
+.category-card img {
+    width: 100%;
+    aspect-ratio: 1/1; /* Square images */
+    object-fit: cover;
+    border-radius: 4px; /* Slight rounding */
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.category-card a:hover img, .category-card a:focus img {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.category-card h3 {
+    font-family: var(--ff-head);
+    font-size: clamp(1.3rem, 3vw, 1.6rem);
+    font-weight: 400;
+}
+
+/* --- New Arrivals Section (Product Cards Alt) --- */
+.product-grid-alt {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.product-card-alt {
+    text-align: center;
+    background-color: #fff; /* If cards have distinct background */
+    border-radius: 4px;
+    overflow: hidden; /* If image is part of card bg */
+    transition: box-shadow 0.3s ease;
+}
+.product-card-alt:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+.product-card-alt img {
+    width: 100%;
+    aspect-ratio: 4/5; /* Taller images for products */
+    object-fit: cover;
+}
+.product-card-alt .product-info {
+    padding: 1.2rem 1rem;
+}
+.product-card-alt h3 {
+    font-family: var(--ff-body); /* Example product names look sans-serif */
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: var(--clr-dark);
+}
+.product-card-alt .price {
+    font-family: var(--ff-body);
+    font-weight: 400;
+    color: var(--clr-taupe);
+    font-size: 1rem;
+}
+
+/* --- Feature Section (e.g., Our Story) --- */
+.feature-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+}
+.feature-image img {
+    width: 100%;
+    height: auto; /* Or fixed height with object-fit */
+    max-height: 700px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.feature-text {
+    padding: 1rem 0; /* Adjust as needed */
+}
+.feature-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--clr-taupe);
+    margin-bottom: 1.5rem;
+}
+.feature-text .btn { margin-top: 1rem; }
+
+/* --- Sustainability Section (variation of feature) --- */
+.background-taupe-panel { /* Reusing from old styles if it fits */
+    background-color: var(--clr-taupe);
+    color: var(--clr-cream);
+    padding: clamp(2rem, 6vw, 4rem);
+    border-radius: 8px;
+}
+.sustainability-content-alt {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+}
+.sustainability-text-alt {
+    flex: 1 1 50%;
+    min-width: 280px;
+}
+.sustainability-image-alt {
+    flex: 1 1 40%;
+    min-width: 250px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.sustainability-image-alt img { width: 100%; height: 100%; object-fit: cover; }
+.section-title-sustainability { /* Specific title for this panel */
+    font-family: var(--ff-head);
+    color: var(--clr-cream); /* Light title on dark background */
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1rem;
+    font-weight: 400;
+    text-align: left;
+}
+.sustainability-text-alt p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+.sustainability-text-alt .btn { margin-top: 1rem; }
+
+
+/* --- Footer --- */
+.site-footer-main {
+    background-color: #fff; /* Or var(--clr-cream) if preferred */
+    color: var(--clr-dark);
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+    border-top: 1px solid #eee;
     font-size: 0.9rem;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    gap: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.footer-column h3 {
+    font-family: var(--ff-body); /* Footer titles often sans-serif */
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--clr-dark);
+    margin-bottom: 1rem;
+    text-transform: uppercase; /* Example style */
+    letter-spacing: 0.05em;
+}
+.footer-column p, .footer-column address {
+    line-height: 1.6;
+    color: var(--clr-taupe);
+}
+.footer-column ul { list-style: none; padding: 0; margin: 0; }
+.footer-column li { margin-bottom: 0.6rem; }
+.footer-column a { color: var(--clr-taupe); }
+.footer-column a:hover, .footer-column a:focus { color: var(--clr-terra); }
+.social-links { display: flex; gap: 1rem; }
+.social-links a { font-size: 0.9rem; }
+
+.newsletter-form-footer input[type="email"] {
+    padding: 0.7em 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    min-width: 200px;
+    margin-bottom: 0.5rem;
+}
+.newsletter-form-footer .btn { padding: 0.7em 1.5em; font-size: 0.9rem; }
+
+.footer-bottom {
+    border-top: 1px solid #eee;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--clr-gold);
-    opacity: 0.8;
+    text-align: center;
+    color: var(--clr-taupe);
+    font-size: 0.85rem;
 }
-html[data-theme="high"] .footer-main {
-    background-color: #000;
-    color: #fff;
-    border-top-color: var(--clr-gold);
-}
-html[data-theme="high"] .footer-main h3,
-html[data-theme="high"] .footer-main a.footer-link-styled {
-    color: #fff;
-}
-html[data-theme="high"] .footer-main a.footer-link-styled:hover,
-html[data-theme="high"] .footer-main a.footer-link-styled:focus {
-    color: var(--clr-gold);
-    text-decoration-color: var(--clr-gold);
-}
-html[data-theme="high"] .footer-copyright {
-    border-top-color: var(--clr-gold);
-}
+.footer-bottom ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0; display: flex; justify-content: center; gap: 1.5rem; }
+.footer-bottom a { color: var(--clr-taupe); }
 
+/* Scroll Reveal (from previous) */
+.reveal-on-scroll { opacity: 0; transform: translateY(25px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
-/* Grayscale */
-html.grayscale {
-    filter: grayscale(1);
-}
-html.grayscale img, html.grayscale svg { /* Ensure images are also grayscale */
-    filter: grayscale(1);
-}
-
-
-/* Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  .reveal-on-scroll {
-      opacity: 1 !important;
-      transform: none !important;
-  }
-}
-
-/* Scroll reveal */
-.reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.65s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.65s cubic-bezier(0.645, 0.045, 0.355, 1);
-    transition-delay: 0.1s; /* Slight delay for staggered effect if desired */
-}
-.reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* Staggered reveal for items in a list/grid */
-.product-grid .card, .icon-columns .icon-column {
-    transition-delay: calc(0.1s * var(--reveal-idx, 0)); /* Use CSS variable for index if set by JS */
-}
-
-
-/* Responsive Adjustments */
-@media (max-width: 900px) { /* Adjust breakpoint for header controls */
-    .header-container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    .main-nav ul {
-        justify-content: center;
-        gap: 0.5rem; /* Smaller gap on mobile */
-        font-size: 0.95rem;
-    }
-     .main-nav a {
-        padding: 0.3rem 0.4rem;
-    }
-    .controls-container {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-    }
-    .hero {
-        flex-direction: column-reverse; /* Image on top on mobile */
-    }
-    .hero-text {
-        padding: 2rem 1.5rem;
-        text-align: center;
-    }
-     .hero-image-container img {
-        aspect-ratio: 16/9; /* Adjust for smaller screens if needed */
-    }
+/* --- Responsiveness --- */
+@media (max-width: 992px) {
+    .feature-section-grid { grid-template-columns: 1fr; }
+    .feature-image { order: -1; /* Image on top on mobile */ margin-bottom: 2rem; }
+    .feature-text, .section-title-alt, .section-title-sustainability { text-align: center; }
+    .sustainability-content-alt { flex-direction: column; }
+    .sustainability-image-alt { order: -1; margin-bottom: 1.5rem; max-width: 400px; align-self: center;}
 }
 
 @media (max-width: 768px) {
-    .sustainability-content {
-        flex-direction: column;
-    }
-    .sustainability-text {
-        flex-basis: auto; /* Reset flex basis */
-    }
-    .sustainability-image {
-        flex-basis: auto;
-        max-width: 350px; /* Constrain image width */
-        margin: 0 auto;
-    }
-    .background-taupe-panel .section-title {
-        text-align: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .newsletter-form {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    .newsletter-form button {
-        width: 100%;
-    }
-    .card-content h3 {
-        font-size: 1.15rem;
-    }
-    .card .btn {
-        padding: .5rem 1rem;
-        font-size: 0.85rem;
-    }
+    .header-container { flex-wrap: wrap; justify-content: center; gap: 1rem;}
+    .main-nav { order: 3; width: 100%; margin-top: 0.5rem; } /* Nav below logo and icons */
+    .main-nav ul { justify-content: center; flex-wrap: wrap;}
+    .hero-section { height: auto; min-height: 70vh; }
+    .hero-content h1 { font-size: clamp(2rem, 8vw, 3rem); }
+    .hero-subtitle { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+    .newsletter-form-footer { display: flex; flex-direction: column; align-items: stretch; }
+    .newsletter-form-footer input[type="email"] { margin-right: 0; margin-bottom: 0.8rem; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-column address, .footer-column ul { text-align: center; }
+    .social-links { justify-content: center; }
 }

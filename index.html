@@ -14,7 +14,7 @@
     <meta property="og:title" content="" data-i18n-attr-content="key_og_title">
     <meta property="og:description" content="" data-i18n-attr-content="key_og_desc">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.positanopapaveri.com/">
+    <meta property="og:url" content="https://www.positanopapaveri.com/"> <!-- Replace with actual URL -->
     <meta property="og:image" content="https://via.placeholder.com/1200x630/F5EFE7/C76548?text=Positano+Papaveri+OG">
     <meta property="og:image:alt" content="Positano Papaveri Jewellery">
 
@@ -29,7 +29,7 @@
       "brand": { "@type": "Brand", "name": "Positano Papaveri" },
       "offers": {
         "@type": "Offer",
-        "url": "https://www.positanopapaveri.com/products/papaveri-bloom-necklace",
+        "url": "https://www.positanopapaveri.com/products/papaveri-bloom-necklace", <!-- Replace with actual URL -->
         "priceCurrency": "EUR",
         "price": "299.00",
         "priceValidUntil": "2025-12-31",
@@ -110,7 +110,7 @@
             <nav class="main-nav" aria-label="Main Navigation">
                 <ul>
                     <li><a href="#new-arrivals" data-i18n-text="key_nav_new_arrivals">New Arrivals</a></li>
-                    <li><a href="#categories">Categories</a></li> {/* New Nav Link */}
+                    <li><a href="#categories" data-i18n-text="key_nav_categories">Categories</a></li>
                     <li><a href="#our-story" data-i18n-text="key_nav_story">Our Story</a></li>
                     <li><a href="#sustainability" data-i18n-text="key_nav_sustainability">Sustainability</a></li>
                 </ul>
@@ -122,11 +122,11 @@
                         <span class="visually-hidden" data-i18n-text="key_a11y_menu_title">Accessibility</span>
                     </button>
                     <div id="a11y-dropdown" class="a11y-dropdown">
-                        <button id="toggle-contrast" aria-pressed="false" data-i18n-title="key_a11y_toggle_contrast">High Contrast</button>
-                        <button id="toggle-grayscale" aria-pressed="false" data-i18n-title="key_a11y_toggle_grayscale">Grayscale</button>
-                        <button id="font-decrease" data-i18n-title="key_a11y_font_decrease">A-</button>
-                        <button id="font-increase" data-i18n-title="key_a11y_font_increase">A+</button>
-                        <button id="toggle-simple-german" data-i18n-title="key_a11y_simple_language" style="display:none;">Simple DE</button>
+                        <button id="toggle-contrast" aria-pressed="false" data-i18n-text="key_a11y_toggle_contrast">High Contrast</button> <!-- text from translations -->
+                        <button id="toggle-grayscale" aria-pressed="false" data-i18n-text="key_a11y_toggle_grayscale">Grayscale</button> <!-- text from translations -->
+                        <button id="font-decrease" data-i18n-text="key_a11y_font_decrease">A-</button> <!-- text from translations -->
+                        <button id="font-increase" data-i18n-text="key_a11y_font_increase">A+</button> <!-- text from translations -->
+                        <button id="toggle-simple-german" data-i18n-text="key_a11y_simple_language" style="display:none;">Simple DE</button> <!-- text from translations -->
                     </div>
                 </div>
                 <div class="language-menu-container">
@@ -165,7 +165,7 @@
         </section>
 
         <section id="categories" class="container text-center responsive-padding">
-            <h2 class="section-title">Shop by Category</h2>
+            <h2 class="section-title" data-i18n-text="key_nav_categories_title">Shop by Category</h2> <!-- Added title for section -->
             <div class="category-grid">
                 <article class="category-card reveal-on-scroll">
                     <a href="#necklaces">
@@ -196,7 +196,7 @@
 
         <section id="new-arrivals" class="container text-center responsive-padding">
             <h2 class="section-title" data-i18n-text="key_section_new_arrivals_title">New Arrivals</h2>
-            <div class="product-grid-alt"> {/* Different class if styling is different from previous product grid */}
+            <div class="product-grid-alt">
                 <article class="product-card-alt reveal-on-scroll">
                     <a href="#product1">
                         <img src="https://via.placeholder.com/400x500/F5EFE7/A28C7A?text=Product+Image+1" alt="Papaveri Gold Necklace" loading="lazy">
@@ -236,7 +236,7 @@
             </div>
         </section>
 
-        <section id="our-story" class="responsive-padding" style="background-color: #ffffff;"> {/* Slight bg change for contrast */}
+        <section id="our-story" class="responsive-padding" style="background-color: #ffffff;">
             <div class="container">
                 <div class="feature-section-grid">
                     <div class="feature-image reveal-on-scroll">
@@ -244,19 +244,19 @@
                     </div>
                     <div class="feature-text reveal-on-scroll">
                         <h2 class="section-title-alt" data-i18n-text="key_section_story_title">Our Story</h2>
-                        <p data-i18n-text="key_story_icon1_desc">The dramatic cliffs, the azure sea, and the vibrant red of Positano's poppy fields are the endless source of our inspiration...</p>
-                        <a href="#story-details" class="btn btn-outline">Read Our Story</a>
+                        <p data-i18n-text="key_story_text_sample">The dramatic cliffs, the azure sea, and the vibrant red of Positano's poppy fields are the endless source of our inspiration. Each piece is a testament to slow luxury, handcrafted with passion and precision...</p> <!-- Using a new key for a more detailed story snippet -->
+                        <a href="#story-details" class="btn btn-outline" data-i18n-text="key_cta_read_story">Read Our Story</a> <!-- New CTA key -->
                     </div>
                 </div>
             </div>
         </section>
 
          <section id="sustainability" class="container responsive-padding background-taupe-panel reveal-on-scroll">
-            <div class="sustainability-content-alt"> {/* Using alt class for potentially different styling */}
+            <div class="sustainability-content-alt">
                 <div class="sustainability-text-alt">
                     <h2 class="section-title-sustainability" data-i18n-text="key_section_sustainability_title">Our Commitment to Sustainability</h2>
-                    <p data-i18n-text="key_sustainability_text">We use recycled materials and adhere to ethical production processes to preserve the beauty of our Earth.</p>
-                     <a href="#sustainability-details" class="btn btn-primary">Learn More</a>
+                    <p data-i18n-text="key_sustainability_text">We use recycled materials and adhere to ethical production processes to preserve the beauty of our Earth. Our dedication extends to every facet of our creations, ensuring a legacy of conscious elegance.</p> <!-- Expanded text -->
+                     <a href="#sustainability-details" class="btn btn-primary" data-i18n-text="key_cta_learn_more">Learn More</a> <!-- New CTA key -->
                 </div>
                 <div class="sustainability-image-alt">
                     <img src="https://via.placeholder.com/500x350/F5EFE7/A28C7A?text=Ethical+Materials"
@@ -265,34 +265,33 @@
             </div>
         </section>
 
-
     </main>
 
     <footer class="site-footer-main">
         <div class="container footer-grid">
             <div class="footer-column">
                 <h3 data-i18n-text="key_brand_name">Positano Papaveri</h3>
-                <p>Discover jewellery inspired by the vibrant Amalfi Coast and the delicate beauty of poppy flowers.</p>
+                <p data-i18n-text="key_footer_brand_desc">Discover jewellery inspired by the vibrant Amalfi Coast and the delicate beauty of poppy flowers.</p> <!-- New key -->
             </div>
             <div class="footer-column">
-                <h3>Quick Links</h3>
+                <h3 data-i18n-text="key_footer_quick_links">Quick Links</h3> <!-- New key -->
                 <ul>
-                    <li><a href="#new-arrivals">New Arrivals</a></li>
-                    <li><a href="#categories">Categories</a></li>
-                    <li><a href="#our-story">Our Story</a></li>
-                    <li><a href="#sustainability">Sustainability</a></li>
+                    <li><a href="#new-arrivals" data-i18n-text="key_nav_new_arrivals">New Arrivals</a></li>
+                    <li><a href="#categories" data-i18n-text="key_nav_categories">Categories</a></li>
+                    <li><a href="#our-story" data-i18n-text="key_nav_story">Our Story</a></li>
+                    <li><a href="#sustainability" data-i18n-text="key_nav_sustainability">Sustainability</a></li>
                     <li><a href="#contact" data-i18n-text="key_nav_contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3 data-i18n-text="key_footer_contact_title">Contact Us</h3>
                 <address>
-                    <span data-i18n-text="key_footer_address">Via dei Papaveri, 1, Positano</span><br>
+                    <span data-i18n-text="key_footer_address">Via dei Papaveri, 1, 84017 Positano SA, Italy</span><br>
                     Email: <a href="mailto:ciao@positanopapaveri.com" data-i18n-text="key_footer_email">ciao@positanopapaveri.com</a>
                 </address>
             </div>
             <div class="footer-column">
-                <h3>Follow Us</h3>
+                <h3 data-i18n-text="key_footer_follow_us">Follow Us</h3> <!-- New key -->
                 <ul class="social-links">
                     <li><a href="#" aria-label="Instagram">Instagram</a></li>
                     <li><a href="#" aria-label="Facebook">Facebook</a></li>
